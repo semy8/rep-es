@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>es</artifactId>
+		<groupId>com.test</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.test.es</groupId>
+	<artifactId>es-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>es-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>native2ascii</goal>
+						</goals>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<src>src/main/resources</src>
+							<dest>target/${project.artifactId}/WEB-INF/classes</dest>
+							<includes>messages.properties,test.properties</includes>
+						</configuration>
+					</execution>
+				</executions>
+				<!-- native2ascii 使用的tools.jar -->
+				<dependencies>
+					<dependency>
+						<groupId>com.sun</groupId>
+						<artifactId>tools</artifactId>
+						<version>1.7.0</version>
+						<scope>system</scope>
+						<systemPath>${java.home}/../lib/tools.jar</systemPath>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.test.es</groupId>
+			<artifactId>es-common</artifactId>
+			<version>${es.common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<es.common.version>0.0.1-SNAPSHOT</es.common.version>
+		<jetty.version>8.1.8.v20121106</jetty.version>
+		<support.basedir>${project.parent.parent.basedir}/src/support</support.basedir>
+		<site.basedir>${project.parent.parent.basedir}</site.basedir>
+		<mysql.version>5.1.9</mysql.version>
+	</properties>
+
+
+</project>
